@@ -15,8 +15,10 @@ module Jekyll
     def get_equipment(site)
       [].tap do |equipment|
         Dir['_equipment/*.yml'].each do |path|
-          name   = File.basename(path, '.yml')
-          equipment << YAML.load(File.read(File.join(@base, path)))
+          name      = File.basename(path, '.yml')
+          data      = YAML.load(File.read(File.join(@base, path)))
+          data["id"]  = name
+          equipment << data
         end
       end
     end
